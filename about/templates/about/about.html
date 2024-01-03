@@ -5,9 +5,7 @@
       <img src="{% static 'images/nobody.jpg' %}" width="75%" />
     </div>
     <div class="col-8">
-      <!-- Title goes between these h2 tags -->
       <h2>{{ about.title }}</h2>
-      <!-- Content goes directly underneath this -->
       {{ about.content | safe }}
     </div>
   </div>
