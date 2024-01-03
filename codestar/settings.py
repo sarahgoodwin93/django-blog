@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-sarahgoodwin93-django-bl-zasivbagxh.us2.codeanyapp.com', '.herokuapp.com']  # noqa
+    '8000-sarahgoodwin93-django-bl-zasivbagxh.us2.codeanyapp.com',
+    '.herokuapp.com']  # noqa
 
 
 # Application definition
