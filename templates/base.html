@@ -1,12 +1,6 @@
-<!-- prettier-ignore -->
-{% load static %} 
-
-{% url 'home' as home_url %} 
-{% url 'about' as about_url %} 
-
-{% url 'account_login' as login_url %} 
-{% url 'account_signup' as signup_url %} 
-{% url 'account_logout' as logout_url %}
+{% load static %} {% url 'home' as home_url %} {% url 'about' as about_url %} {%
+url 'account_login' as login_url %} {% url 'account_signup' as signup_url %} {%
+url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -69,16 +63,16 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                class="nav-link {% if request.path == home_url %}active{% endif %}"
-                aria-current="page"
+                class="nav-link {% if request.path == home_url %}active"
+                aria-current="page{% endif %}"
                 href="{% url 'home' %}"
                 >Home</a
               >
             </li>
             <li class="nav-item">
               <a
-                class="nav-link {% if request.path == about_url %}active{% endif %}"
-                aria-current="page"
+                class="nav-link {% if request.path == about_url %}active"
+                aria-current="page{% endif %}"
                 href="{% url 'about' %}"
                 >About</a
               >
@@ -86,8 +80,8 @@
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a
-                class="nav-link {% if request.path == logout_url %}active{% endif %}"
-                aria-current="page"
+                class="nav-link {% if request.path == logout_url %}active"
+                aria-current="page{% endif %}"
                 href="{% url 'account_logout' %}"
                 >Logout</a
               >
@@ -95,16 +89,16 @@
             {% else %}
             <li class="nav-item">
               <a
-                class="nav-link {% if request.path == signup_url %}active{% endif %}"
-                aria-current="page"
+                class="nav-link {% if request.path == signup_url %}active"
+                aria-current="page{% endif %}"
                 href="{% url 'account_signup' %}"
                 >Register</a
               >
             </li>
             <li class="nav-item">
               <a
-                class="nav-link {% if request.path == login_url %}active{% endif %}"
-                aria-current="page"
+                class="nav-link {% if request.path == login_url %}active"
+                aria-current="page{% endif %}"
                 href="{% url 'account_login' %}"
                 >Login</a
               >
@@ -117,10 +111,30 @@
         </div>
       </div>
     </nav>
-
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          {% for message in messages %}
+          <div
+            class="alert {{ message.tags }} alert-dismissible fade show"
+            id="msg"
+            role="alert"
+          >
+            {{ message | safe }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
     <main class="flex-shrink-0 main-bg">
       {% if user.is_authenticated %}
-      <p class="text-end m-3">You are logged in as {{ user.username }}</p>
+      <p class="text-end m-3">You are logged in as {{ user }}</p>
       {% else %}
       <p class="text-end m-3">You are not logged in</p>
       {% endif %} {% block content %}
@@ -146,6 +160,7 @@
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
       crossorigin="anonymous"
     ></script>
-    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block extras %} {% endblock %}
   </body>
 </html>
